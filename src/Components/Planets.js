@@ -12,6 +12,7 @@ function Planets() {
     column,
     columns,
     FiltersForm,
+    numericFilters,
   } = useContext(StarWarsContext);
   return (
     <form>
@@ -27,13 +28,7 @@ function Planets() {
         value={ column }
         onChange={ columns }
       >
-        {[
-          'population',
-          'orbital_period',
-          'diameter',
-          'rotation_period',
-          'surface_water',
-        ].map((event) => (
+        {numericFilters.map((event) => (
           <option key={ event } value={ event }>
             {event}
           </option>
