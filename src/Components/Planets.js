@@ -2,7 +2,17 @@ import { useContext } from 'react';
 import StarWarsContext from '../Context/StarWarsContext';
 
 function Planets() {
-  const { inputTextFilter, handleInputTextFilter } = useContext(StarWarsContext);
+  const {
+    inputTextFilter,
+    handleInputTextFilter,
+    quantity,
+    quantityForm,
+    getQuantity,
+    getQuantitys,
+    column,
+    columns,
+    FiltersForm,
+  } = useContext(StarWarsContext);
   return (
     <form>
       <input
@@ -12,6 +22,44 @@ function Planets() {
         onChange={ handleInputTextFilter }
         data-testid="name-filter"
       />
+      <select
+        data-testid="column-filter"
+        value={ column }
+        onChange={ columns }
+      >
+        {[
+          'population',
+          'orbital_period',
+          'diameter',
+          'rotation_period',
+          'surface_water',
+        ].map((event) => (
+          <option key={ event } value={ event }>
+            {event}
+          </option>
+        ))}
+      </select>
+
+      <select
+        value={ quantityForm }
+        onChange={ getQuantitys }
+        data-testid="comparison-filter"
+      >
+        <option value="maior que">maior que</option>
+        <option value="menor que">menor que</option>
+        <option value="igual A">igual a</option>
+      </select>
+
+      <input
+        type="number"
+        data-testid="value-filter"
+        value={ quantity }
+        onChange={ getQuantity }
+      />
+
+      <button type="button" data-testid="button-filter" onClick={ FiltersForm }>
+        Adicionar Filtro
+      </button>
     </form>
   );
 }
