@@ -22,6 +22,7 @@ function Planets() {
         value={ inputTextFilter }
         onChange={ handleInputTextFilter }
         data-testid="name-filter"
+        placeholder="planet"
       />
       <select
         data-testid="column-filter"
@@ -50,6 +51,7 @@ function Planets() {
         data-testid="value-filter"
         value={ quantity }
         onChange={ getQuantity }
+        placeholder="quantity"
       />
 
       <button type="button" data-testid="button-filter" onClick={ FiltersForm }>
