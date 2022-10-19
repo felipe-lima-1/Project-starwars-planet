@@ -4,6 +4,7 @@ import StarWarsContext from './StarWarsContext';
 
 function StarWarsProvider({ children }) {
   const [planetsList, setPlanetsList] = useState([]);
+  const [inputTextFilter, setTextFilter] = useState('');
 
   useEffect(() => {
     const Api = async () => {
@@ -15,7 +16,15 @@ function StarWarsProvider({ children }) {
     Api();
   }, []);
 
-  const planets = useMemo(() => ({ planetsList }), [planetsList]);
+  const handleInputTextFilter = ({ target: { value } }) => {
+    setTextFilter(value);
+  };
+
+  const planets = useMemo(
+    () => (
+      { planetsList, inputTextFilter, handleInputTextFilter }),
+    [planetsList, inputTextFilter],
+  );
   return (
     <StarWarsContext.Provider value={ planets }>
       {children}
