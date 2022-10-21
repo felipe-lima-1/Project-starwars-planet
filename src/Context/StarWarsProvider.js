@@ -40,12 +40,10 @@ function StarWarsProvider({ children }) {
       const data = planetsList.filter((event) => +event[column] > +quantity);
       setPlanetsList(data);
     }
-
     if (quantityForm === 'menor que') {
       const data = planetsList.filter((event) => +event[column] < +quantity);
       setPlanetsList(data);
     }
-
     if (quantityForm === 'igual A') {
       const data = planetsList.filter((event) => +event[column] === +quantity);
       setPlanetsList(data);

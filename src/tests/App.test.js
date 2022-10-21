@@ -21,23 +21,30 @@ describe('Testa o app', () => {
   it('Verifica o filtro', async () => {
     render(<App />);
 
+    const bespin = await screen.findByText(/Bespin/i, {}, { timeout: 15000 }); 
     const planet = screen.getByPlaceholderText('planet');
     const valueFilter = screen.getByTestId('value-filter');
+    const valueComparison = screen.getByTestId('column-filter');
+    const compFilter = screen.getByTestId('comparison-filter');
     const buttonFilter = screen.getByRole('button', {
       name: /adicionar filtro/i,
     });
-
+    
     expect(planet).toBeInTheDocument();
     expect(valueFilter).toBeInTheDocument();
+    expect(valueComparison).toBeInTheDocument();
+    expect(bespin).toBeInTheDocument();
+    
 
     userEvent.type(planet, 'Dagobah');
-    userEvent.type(valueFilter, '10');
-
+    userEvent.selectOptions(valueComparison, 'population');
+    userEvent.selectOptions(compFilter, 'maior que');
+    userEvent.type(valueFilter, '0');
+    userEvent.click(buttonFilter);
+    userEvent.selectOptions(compFilter, 'menor que');
+    userEvent.click(buttonFilter);
+    userEvent.selectOptions(compFilter, 'igual a');
     userEvent.click(buttonFilter);
 
-    const planetsTest = await screen
-      .findAllByTestId('planets', undefined, { timeout: 2000 });
-
-    expect(planetsTest.length).toBe(1);
   });
 });
